@@ -50,6 +50,13 @@
   filter: alpha(opacity=60); /* For IE8 and earlier */
 }
 
+.audio-overlap {
+  position: relative; 
+  bottom: 50px;
+  text-align: center;
+  margin-bottom: 130px;
+}
+
 .overlayed-image {
   position: relative; 
   width: 100%;
