@@ -1,1 +1,1 @@
-$('video').mediaelementplayer();
+$('audio').mediaelementplayer();
