@@ -1,0 +1,118 @@
+<html>
+<head>
+  <title></title>
+  <style type="text/css"> 
+    div {
+      margin-top: 3px;
+      padding: 0 10px;
+    }
+
+    button {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 18px 10px;
+      line-height: 1;
+      color: #fff;
+      background: #345;
+      border: 0;
+      border-radius: 4px;
+      margin-left: 0.75em;
+    }
+
+    p {
+      display: inline-block;
+      margin-left: 10px;
+    }
+</style>
+</head>
+<body>
+  <iframe id="player1" src="//player.vimeo.com/video/76979871?api=1&player_id=player1" width="630" height="354" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+<div>
+  <button>Play</button>
+  <button>Pause</button>
+  <p>Status: <span class="status">&hellip;</span></p>
+</div>
+
+<script src="./js/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    var player = $('iframe');
+    var url = window.location.protocol + player.attr('src').split('?')[0];
+    var status = $('.status');
+
+    // Listen for messages from the player
+    if (window.addEventListener){
+        window.addEventListener('message', onMessageReceived, false);
+    }
+    else {
+        window.attachEvent('onmessage', onMessageReceived, false);
+    }
+
+    // Handle messages received from the player
+    function onMessageReceived(e) {
+        var data = JSON.parse(e.data);
+        
+        switch (data.event) {
+            case 'ready':
+                onReady();
+                break;
+               
+            case 'playProgress':
+                onPlayProgress(data.data);
+                break;
+                
+            case 'pause':
+                onPause();
+                break;
+               
+            case 'finish':
+                onFinish();
+                break;
+        }
+    }
+
+    // Call the API when a button is pressed
+    $('button').on('click', function() {
+        post($(this).text().toLowerCase());
+    });
+
+    // Helper function for sending a message to the player
+    function post(action, value) {
+        var data = {
+          method: action
+        };
+        
+        if (value) {
+            data.value = value;
+        }
+        
+        var message = JSON.stringify(data);
+        player[0].contentWindow.postMessage(data, url);
+    }
+
+    function onReady() {
+        status.text('ready');
+        
+        post('addEventListener', 'pause');
+        post('addEventListener', 'finish');
+        post('addEventListener', 'playProgress');
+    }
+
+    function onPause() {
+        status.text('paused');
+    }
+
+    function onFinish() {
+        status.text('finished');
+    }
+
+    function onPlayProgress(data) {
+        status.text(data.seconds + 's played');
+    }
+});
+</script>
+</body>
+</html>
