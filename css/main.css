@@ -1,5 +1,5 @@
 /* Header block */
-.header-background:after {
+/*.header-background:after {
     content : "";
     display: block;
     position: absolute;
@@ -10,11 +10,24 @@
     height: 100%;
     opacity : 0.75;
     z-index: -1;
+}*/
+
+.header-background {
+  background-color: rgba(1,1,1,0.5);
 }
 
 .navbar-default .navbar-brand{
   color: white;
 }
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+  font-weight: bold;
+ }
+
+ .navbar-nav.navbar-right:last-child {
+  margin-right: 0px;
+ }
 
 
 /* Images section */
@@ -51,12 +64,14 @@
 }
 
 /* footer styling */
-.push {
-  height: 130px;
+
+body {
+  margin-bottom: 0px;
 }
 
 .footer {
+  position: relative;
   color: white;
   background-color: black;
-  height: 150px;
+  height: 100%;
 }
