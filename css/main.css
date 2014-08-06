@@ -25,7 +25,7 @@
 }
 
 .first-image-bottom {
-  margin: -250px;
+  margin-bottom: -250px;
 }
 
 .image-overlap {
@@ -51,8 +51,12 @@
 }
 
 /* footer styling */
+.push {
+  height: 130px;
+}
 
 .footer {
   color: white;
   background-color: black;
+  height: 150px;
 }
