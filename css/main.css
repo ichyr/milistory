@@ -87,6 +87,13 @@ video {
   width: 100%;
 }
 
+/* galery slide styling overrides */
+
+.bx-wrapper .bx-viewport {
+  left: 0px;
+  border: 0;
+}
+
 /* footer styling */
 
 body {

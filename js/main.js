@@ -1,3 +1,7 @@
-jQuery(function() {
-    jQuery(".player").mb_YTPlayer();
+$(document).ready(function() {
+    $('.bxslider').bxSlider({
+        infiniteLoop: false,
+        hideControlOnEnd: true,
+        pager: false
+    });
 });
